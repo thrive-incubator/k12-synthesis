@@ -33,37 +33,47 @@ clean and conversion-safe (see Markdown conventions).
 
 ## How this works
 
-There is no bundled script and no dependencies. Running in Claude Code, you fetch the sources
-yourself with your own fetch and bash tools, then curate. This is a deliberate trade: it's
-simpler and more adaptive (when a feed moves or a query returns noise, reason about it, follow a
-redirect, or adjust the search) at the cost of some run-to-run consistency and more token use
-per run. Lean on your judgment.
+Two layers, split on purpose: **deterministic plumbing in code, judgment in the model.**
+
+- **`ingest.py` (the plumbing)** fetches every no-auth source, parses RSS/Atom/JSON, filters news
+  to the window, filters grants to those open/closing soon, dedupes, and writes `candidates.json`
+  — a compact (~9k-token) list of candidate items. It is stdlib-only (no pip installs) and runs
+  the same way every week, so the ingestion is reproducible and a single bad feed can't silently
+  drop coverage (it's reported loudly instead). This replaces ~800k tokens of raw XML that would
+  otherwise have to be read into context.
+- **You (the judgment)** read `candidates.json` and do the part that can't be coded: apply the
+  relevance bar, assign layers, dedupe across wire copies, write the raw-fact-plus-"So what"
+  items, and synthesize the throughline. Lean on your judgment here; the script never makes an
+  editorial call.
+
+If `ingest.py` can't run (e.g. no Python), fall back to fetching sources directly with curl —
+but that's the exception, not the design.
 
 ## Workflow
 
-1. **Set the window.** Default to the trailing 7 days ending today; if the user names a
-   different range, use it. State the window at the top of the synthesis.
-2. **Fetch every source in the Sources list:**
-   - RSS feeds are XML. Fetch the feed URL and read it for item titles, links, and dates. If the
-     fetch tool returns something unusable, pull the raw feed with bash —
-     `curl -sL -A "Mozilla/5.0" <feed-url>` — and read the XML directly. If a feed is truly dead,
-     fall back to a Google News query on the same topic.
-   - Google News topic queries return RSS. Fetch the query URL; each `<item>` is a matching
-     article with a title, link, source, and `pubDate`. These are your main tool for targeted
-     wellbeing/funding searches and for any layer without a dedicated feed.
-   - JSON APIs (Federal Register, Grants.gov): fetch/POST the query and read the JSON.
-   - Don't let a single dead source stop the run. Track what you couldn't retrieve and disclose
-     it in the footer.
-3. **Filter for relevance.** Apply the bar in What counts. Be strict — a synthesis of 12–18
-   sharp items beats 40 where half are noise. Cutting a marginal item is the safer error.
-4. **Sort into the six layers.** See The layers. If an item fits two, place it where the funding
-   logic is clearest; don't duplicate.
-5. **Dedupe across sources.** Same story in several feeds → one entry, cite the most original or
-   detailed source, mention the others in a trailing note. Google News will surface many copies
-   of the same wire story — collapse them.
-6. **Write each item** in the standard item format: raw fact first, optional "So what" line.
-7. **Write "This Week's Throughline" last**, once every layer exists — it is the synthesis pass.
-8. **Save the markdown file** and tell the user where it is.
+1. **Set the window.** Default to the trailing 7 days ending today; if the user names a different
+   range, use it. State the window at the top of the synthesis.
+2. **Run the ingest script** from the skill directory:
+   ```
+   python3 ingest.py --end <YYYY-MM-DD> --out /tmp/candidates.json
+   ```
+   (Omit `--end` for today; use `--days N` for a non-7-day window.) Read its stderr summary —
+   **if it lists sources as "degraded or unavailable," note them for the footer; that's a real
+   coverage gap, not a detail to skip.**
+3. **Read `candidates.json`.** It has `news` (each with a `layer_hint`), `opportunities`
+   (grants, sorted by soonest close), `federal_register`, and `unavailable`.
+4. **Filter for relevance.** Apply the bar in What counts. Be strict — a synthesis of 12–18 sharp
+   items beats 40 where half are noise. The script errs toward recall; you supply the precision.
+   Cutting a marginal item is the safer error. A few international/higher-ed items still slip past
+   the query exclusions — drop them here.
+5. **Sort into the six layers.** Use `layer_hint` as a starting suggestion, not a verdict —
+   reassign by where the funding logic is clearest. If an item fits two, place it once.
+6. **Dedupe across sources.** The script dedupes by title, but near-duplicate wire stories under
+   different outlets still slip through — collapse them, citing the most original/detailed.
+7. **Write each item** in the standard item format: raw fact first, optional "So what" line.
+8. **Write "This Week's Throughline" last**, once every layer exists — it is the synthesis pass.
+9. **Save the markdown file**, include any unavailable sources in the footer, and tell the user
+   where it is.
 
 ## The layers
 
@@ -108,12 +118,16 @@ board politics with no funding or wellbeing angle; higher-ed-only or internation
 with no K12 relevance; and all-of-government grants or federal-register notices unrelated to
 education or youth health. When unsure, leave it out.
 
-## Sources (all no-auth, verified live)
+## Sources (all no-auth)
 
-### Layer-spanning RSS feeds
+`ingest.py` fetches everything below — you don't fetch these by hand. This section documents what
+the script covers and how to edit it (the source lists live in clearly-marked constants at the top
+of `ingest.py`: `FEEDS`, `GN_QUERIES`, `FR_QUERIES`, `GRANTS_KEYWORDS`). When you change a source
+here, change it there.
 
-Fetch all of these every run; they feed multiple layers. Tag each item to its best-fit layer
-during curation.
+### Layer-spanning RSS feeds (`FEEDS`)
+
+These feed multiple layers; each carries a `layer_hint` the model can override during curation.
 
 | Source | Feed | Feeds mainly |
 | --- | --- | --- |
@@ -123,8 +137,11 @@ during curation.
 | The 74 | https://www.the74million.org/feed/ | Charter, Federal, Ideas — strong charter and policy coverage. |
 | Chalkbeat | https://www.chalkbeat.org/arc/outboundfeeds/rss/ | State, District — strong local/state bureaus. High volume; filter hard. |
 | Hechinger Report | https://hechingerreport.org/feed/ | Ideas, District — research-leaning education journalism. |
-| Child Trends | https://www.childtrends.org/feed | Ideas — child & youth wellbeing research and evidence. |
 | Education Commission of the States | https://www.ecs.org/feed/ | State, Ideas — state policy analysis and briefs. |
+
+*Dropped: Child Trends — its feed went permanently 404/504 (intermittent at best); the Ideas layer
+is covered by Hechinger, The 74, ECS, and the Ideas Google News query. Re-add to `FEEDS` if it
+comes back.*
 
 ### Google News topic queries (RSS, no-auth)
 
@@ -204,6 +221,23 @@ directly; their coverage is recovered through the Google News queries above:
 - **National Alliance for Public Charter Schools** → Charter queries + The 74.
 - **Brookings / FPF Student Privacy Compass** → Ideas and Federal queries.
 - **ED.gov** (no real RSS) → Federal Register API + Federal queries.
+
+## Known blind spots (state these in the synthesis when relevant)
+
+The instrument is honest about what it can't see. Two layers are structurally under-covered
+because no clean no-auth source exists, and you should not mistake a quiet week there for nothing
+happening:
+
+- **State Systems (mechanics).** "How federal dollars become state allocations" — state plan
+  amendments, Medicaid school-services policy, allocation formulas — lives in state agency sites,
+  NASBO, and Medicaid bulletins, none of which are ingested. We catch state news via journalism
+  (Chalkbeat, The 74, ECS, Google News), not the allocation machinery itself.
+- **District Purchasing (the actual buying).** Real procurement signals — RFPs, contract awards,
+  board-agenda line items — live on paid bid boards (GovSpend, BidNet) and district portals. We
+  infer demand from budget-cut *journalism*, not observed *purchasing*.
+
+When the synthesis leans on either layer, say what's inferred vs. observed. Closing these gaps
+would require a paid data source — a deliberate future decision, not a bug to fix silently.
 
 ## Dates and windows
 

@@ -20,12 +20,26 @@ framework.
 
 ## How it works
 
-No scripts, no dependencies. Claude fetches a fixed set of **no-auth** sources directly —
-RSS feeds, Google News topic queries, and public JSON APIs (Federal Register, Grants.gov) —
-filters for relevance, keeps facts mostly raw with a thin layer of synthesis on top, sorts items
-into the six layers, and writes a clean, docx-ready markdown file.
+**Deterministic plumbing in code, judgment in the model.**
 
-See [`SKILL.md`](SKILL.md) for the full source list and workflow.
+- [`ingest.py`](ingest.py) (stdlib only, no dependencies) fetches a fixed set of **no-auth**
+  sources — RSS/Atom feeds, Google News topic queries, and public JSON APIs (Federal Register,
+  Grants.gov) — parses them, filters news to the window and grants to those open/closing soon,
+  dedupes, and writes a compact `candidates.json` (~9k tokens, vs. ~800k tokens of raw XML). A
+  dead source is reported loudly, never dropped silently.
+- **Claude** reads `candidates.json` and does the rest by judgment: applies the relevance bar,
+  assigns the six layers, keeps facts raw with a thin layer of synthesis on top, and writes a
+  clean, docx-ready markdown file.
+
+See [`SKILL.md`](SKILL.md) for the full source list, workflow, and known blind spots.
+
+## Run the ingest step directly
+
+```
+python3 ingest.py                   # trailing 7 days ending today
+python3 ingest.py --days 14         # custom window
+python3 ingest.py --end 2026-06-24 --out /tmp/candidates.json
+```
 
 ## Usage
 
