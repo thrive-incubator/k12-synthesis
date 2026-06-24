@@ -49,8 +49,24 @@ Once installed as a Claude Code skill, trigger it with any of: "run the Thrive s
 
 ## Install
 
-Symlink (or copy) this repo into your Claude skills directory:
+Symlink this repo into your Claude skills directory (so edits here go live immediately). Run from
+inside the cloned repo:
 
 ```
-ln -s "$PWD" ~/.claude/skills/thrive-k12-synthesis
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)" ~/.claude/skills/thrive-k12-synthesis
 ```
+
+`mkdir -p` is needed because `~/.claude/skills/` may not exist on a fresh setup, and `ln` won't
+create it. Prefer a copy over a symlink? Use `cp -R "$(pwd)" ~/.claude/skills/thrive-k12-synthesis`
+instead — but then re-copy after each change.
+
+Verify it took:
+
+```
+ls -l ~/.claude/skills/thrive-k12-synthesis/SKILL.md   # should resolve
+python3 ~/.claude/skills/thrive-k12-synthesis/ingest.py --out /tmp/candidates.json
+```
+
+Requires Python 3 (stdlib only — no `pip install`). Restart Claude Code after installing so the
+skill loads.
