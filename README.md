@@ -1,4 +1,4 @@
-# thrive-k12-synthesis
+# k12-synthesis
 
 A weekly K12 news synthesis skill for Claude, built for the Thrive Center.
 
@@ -54,18 +54,18 @@ inside the cloned repo:
 
 ```
 mkdir -p ~/.claude/skills
-ln -s "$(pwd)" ~/.claude/skills/thrive-k12-synthesis
+ln -s "$(pwd)" ~/.claude/skills/k12-synthesis
 ```
 
 `mkdir -p` is needed because `~/.claude/skills/` may not exist on a fresh setup, and `ln` won't
-create it. Prefer a copy over a symlink? Use `cp -R "$(pwd)" ~/.claude/skills/thrive-k12-synthesis`
+create it. Prefer a copy over a symlink? Use `cp -R "$(pwd)" ~/.claude/skills/k12-synthesis`
 instead — but then re-copy after each change.
 
 Verify it took:
 
 ```
-ls -l ~/.claude/skills/thrive-k12-synthesis/SKILL.md   # should resolve
-python3 ~/.claude/skills/thrive-k12-synthesis/ingest.py --out /tmp/candidates.json
+ls -l ~/.claude/skills/k12-synthesis/SKILL.md   # should resolve
+python3 ~/.claude/skills/k12-synthesis/ingest.py --out /tmp/candidates.json
 ```
 
 Requires Python 3 (stdlib only — no `pip install`). Restart Claude Code after installing so the

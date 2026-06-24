@@ -1,5 +1,5 @@
 ---
-name: thrive-k12-synthesis
+name: k12-synthesis
 description: >-
   Generate the weekly Thrive Center K12 synthesis: a research briefing that maps the K12 funding ecosystem — federal dollars and policy flowing down through state systems, district purchasing, and the charter sector, into the technology/vendor layer and the ideas/influence layer — with a deliberate weighting toward student wellbeing and mental health. The goal is to help a time-poor Thrive Center researcher see how ideas that produce positive wellbeing outcomes can take root inside the real funding framework. Fetches a fixed set of no-auth RSS feeds, Google News topic queries, and public JSON APIs directly, keeps facts mostly raw with a thin layer of synthesis on top, organizes everything into six layers, and writes the result as a markdown file. Use whenever the user asks for the weekly Thrive synthesis, the K12 funding/wellbeing landscape, the Thrive Center briefing, a "this week in K12 funding & wellbeing" roundup, or wants to regenerate, refresh, or rerun the synthesis — even for terse asks like "run the synthesis" or "what moved in K12 this week."
 ---
