@@ -266,7 +266,7 @@ Write it last.}
 ## Federal Funding & Policy
 
 ### {Raw headline — what happened, in the source's terms}
-*{Source} · {Month DD, YYYY} · [link]({url})*
+*{Source} · {Month DD, YYYY}* · [link]({url})
 
 {1–2 sentences. Keep the key facts raw: dollar amounts, program names, agencies, dates.}
 
@@ -281,7 +281,7 @@ Charter School Sector, Technology & Vendor Layer, Ideas & Influence Layer...}
 ## Open Funding Opportunities (wellbeing-relevant, open / upcoming)
 
 ### {Solicitation / grant title}
-*{Agency / program} · Opens {date} · **Closes {date}** · [link]({url})*
+*{Agency / program} · Opens {date}* · **Closes {date}** · [link]({url})
 
 {What it funds and, if known, who's eligible. Note "⚠ closes in {N} days" if within 14.}
 
@@ -296,6 +296,10 @@ synthesis short. Never pad with marginal items to hit a length.
 
 - Use ATX headings (`#`, `##`, `###`) — these map directly to Word heading styles.
 - Standard bullet lists and `**bold**` / `*italic*` only. Plain `[text](url)` links.
+- **Never nest a link inside an emphasis span.** Close the italic *before* the link —
+  `*{Source} · {date}* · [link]({url})`, not `*{Source} · {date} · [link]({url})*`. A link
+  wrapped in `*…*` is mis-parsed by Obsidian-style renderers (it prepends a stray `_` and the
+  link won't open). Same rule for bold: keep `**Closes {date}**` and the link outside the italic.
 - No raw HTML, no nested tables, no multi-level bullet gymnastics — those break in
   markdown-to-docx conversion.
 
