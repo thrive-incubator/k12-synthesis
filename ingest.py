@@ -302,6 +302,18 @@ def main():
     news.sort(key=lambda x: x["date"], reverse=True)
     opportunities.sort(key=lambda x: (x["days_to_close"] is None, x["days_to_close"] if x["days_to_close"] is not None else 1e9))
 
+    # Assign stable citation refs AFTER sorting so ids are deterministic within a run.
+    # The synthesis model cites these tokens — [link]({{n012}}) — instead of ever typing a URL;
+    # assemble.py expands {{ref}} back to the exact link and rejects any hand-typed URL. A URL is
+    # an opaque string a model cannot reliably reproduce from memory, so the only safe design is to
+    # keep URLs entirely in code and let the model carry a short, checkable token.
+    for i, n in enumerate(news, 1):
+        n["ref"] = f"n{i:03d}"
+    for i, o in enumerate(opportunities, 1):
+        o["ref"] = f"o{i:02d}"
+    for i, fr in enumerate(fed_register, 1):
+        fr["ref"] = f"fr{i}"
+
     out = {
         "window": {"start": start.isoformat(), "end": end.isoformat(), "days": args.days},
         "generated_at": dt.datetime.now().isoformat(timespec="seconds"),

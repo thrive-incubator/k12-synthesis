@@ -46,9 +46,17 @@ Two layers, split on purpose: **deterministic plumbing in code, judgment in the 
   relevance bar, assign layers, dedupe across wire copies, write the raw-fact-plus-"So what"
   items, and synthesize the throughline. Lean on your judgment here; the script never makes an
   editorial call.
+- **Links stay in code, never in your prose.** Every candidate in `candidates.json` carries a short
+  `ref` (e.g. `n012`, `o03`, `fr1`). When you cite a source you write that token — `[link]({{n012}})` —
+  **never a URL.** A URL is an opaque string (article ids, redirect blobs) you cannot reproduce from
+  memory; if you type one from your understanding of an item, you will sooner or later emit a
+  plausible-but-wrong link that looks correct and passes every eyeball check. So don't type URLs at
+  all. `assemble.py` (step 9) swaps each `{{ref}}` for its exact link and rejects any hand-typed URL
+  or unknown token, so a fabricated link cannot reach the final file.
 
 If `ingest.py` can't run (e.g. no Python), fall back to fetching sources directly with curl —
-but that's the exception, not the design.
+but that's the exception, not the design. Even in the fallback, cite the exact URL you actually
+fetched; never reconstruct a URL from a headline.
 
 ## Workflow
 
@@ -71,10 +79,19 @@ but that's the exception, not the design.
    reassign by where the funding logic is clearest. If an item fits two, place it once.
 6. **Dedupe across sources.** The script dedupes by title, but near-duplicate wire stories under
    different outlets still slip through — collapse them, citing the most original/detailed.
-7. **Write each item** in the standard item format: raw fact first, optional "So what" line.
+7. **Write each item** in the standard item format: raw fact first, optional "So what" line. Cite
+   each source with that item's `{{ref}}` token from `candidates.json` — never a typed URL.
 8. **Write "This Week's Throughline" last**, once every layer exists — it is the synthesis pass.
-9. **Save the markdown file**, include any unavailable sources in the footer, and tell the user
-   where it is.
+9. **Assemble, then save.** Write your draft (with `{{ref}}` tokens, no URLs) to a file, then expand
+   and verify the links:
+   ```
+   python3 assemble.py --candidates /tmp/candidates.json --draft <draft>.md --out <final>.md
+   ```
+   `assemble.py` replaces every token with its exact link and **fails if it finds any hand-typed URL
+   or unknown token**, so a fabricated link cannot reach the final file. Read its stderr ref→source
+   map to confirm tokens point at the items you meant; fix any error it reports (re-cite the token —
+   do **not** hand-edit a URL in) and re-run. Include unavailable sources in the footer, then tell
+   the user where the final file is.
 
 ## The layers
 
@@ -266,7 +283,7 @@ Write it last.}
 ## Federal Funding & Policy
 
 ### {Raw headline — what happened, in the source's terms}
-*{Source} · {Month DD, YYYY}* · [link]({url})
+*{Source} · {Month DD, YYYY}* · [link]({{ref}})
 
 {1–2 sentences. Keep the key facts raw: dollar amounts, program names, agencies, dates.}
 
@@ -281,13 +298,18 @@ Charter School Sector, Technology & Vendor Layer, Ideas & Influence Layer...}
 ## Open Funding Opportunities (wellbeing-relevant, open / upcoming)
 
 ### {Solicitation / grant title}
-*{Agency / program} · Opens {date}* · **Closes {date}** · [link]({url})
+*{Agency / program} · Opens {date}* · **Closes {date}** · [link]({{ref}})
 
 {What it funds and, if known, who's eligible. Note "⚠ closes in {N} days" if within 14.}
 
 ---
 *Sources unavailable this run: {list, if any}.*
 ```
+
+`{{ref}}` is a literal citation token — the candidate's `ref` from `candidates.json`, expanded to
+the real link by `assemble.py`. **Every** link uses one, including secondary sources cited inline
+inside an item (e.g. collapsing a wire duplicate): write `(also: [Source, date]({{n034}}))`, never a
+typed URL. If a fact has no `ref`, it has no verifiable source — leave it out.
 
 If it was a genuinely light week, say so plainly in This Week's Throughline and keep the
 synthesis short. Never pad with marginal items to hit a length.
