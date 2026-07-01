@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Obsidian workspace state (keep settings, ignore per-machine UI state)
+# ** so it matches vault/.obsidian/ now that the vault is a subfolder
+**/.obsidian/workspace*
+**/.obsidian/cache
+
+# Python tooling (skills/)
+__pycache__/
+*.pyc
+
+# Editor / OS cruft
+*~
+.idea/
+.vscode/
+
+# Temp / scratch
+*.tmp
+*.bak

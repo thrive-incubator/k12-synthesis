@@ -1,0 +1,2 @@
+# Keeps the empty 2026 digest directory tracked by git.
+# Weekly digests land here as 2026-Wxx.md, newest by ISO week.
