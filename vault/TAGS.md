@@ -1,6 +1,6 @@
 ---
 type: vocabulary
-last_updated: 2026-W27
+last_updated: 2026-W29
 ---
 
 # TAGS — Controlled Vocabulary
@@ -41,6 +41,8 @@ prefer an existing tag over coining a near-synonym.
 - `enrollment-decline` — falling K-12 enrollment and its per-pupil revenue and consolidation effects.
 - `assessment` — academic testing and assessment products and the companies behind them.
 - `special-education` — funding and administration of special education / IDEA services.
+- `classroom-ai` — AI products, policy, guidance, and procurement in K-12 classrooms.
+- `chronic-absenteeism` — chronic absenteeism, attendance recovery, and student re-engagement.
 
 ## Naming rules
 

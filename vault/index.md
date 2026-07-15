@@ -1,6 +1,6 @@
 ---
 type: index
-last_updated: 2026-W27
+last_updated: 2026-W29
 ---
 
 # Thrive Center K12 Knowledge Vault
@@ -41,7 +41,10 @@ naming rules) is in [TAGS.md](TAGS.md).
 
 Each theme links to its page in `themes/`.
 
-- [School Mental Health Funding — State vs Federal Reliability](themes/school-mental-health-funding.md) — states stepping in as federal school-mental-health money wobbles.
+- [School Mental Health Funding — State vs Federal Reliability](themes/school-mental-health-funding.md) — states stepping in as federal school-mental-health money wobbles; now in open litigation (15 states v. ED).
+- [Federal Education Restructuring — ED Downsizing & Outsourcing](themes/federal-education-restructuring.md) — the dismantling/outsourcing of ED, contested and codified at once.
+- [Classroom AI — Policy, Procurement & the Vendor Race](themes/classroom-ai.md) — the AI land-grab meeting district procurement gates.
+- [Chronic Absenteeism & Re-engagement](themes/chronic-absenteeism.md) — attendance as the accountability frame for wellbeing investments.
 - [Enrollment Decline & District Consolidation](themes/enrollment-decline-consolidation.md) — shrinking per-pupil revenue and the resulting school closures.
 
 ## Tracked entities
@@ -50,6 +53,7 @@ Grouped by type; each entity links to its page in `entities/`.
 
 ### Companies
 
+- [Anthropic](entities/companies/anthropic.md) — AI company; launched Claude for Teachers (2026-W29).
 - [Educational Testing Service (ETS)](entities/companies/ets.md) — assessment giant; acquired ACT (2026-W27).
 - [ACT](entities/companies/act.md) — assessment organization; acquired by ETS (2026-W27).
 
@@ -61,7 +65,7 @@ Grouped by type; each entity links to its page in `entities/`.
 
 ### Programs
 
-- [Trauma-Informed Services in Schools](entities/programs/trauma-informed-services-in-schools.md) — SAMHSA grant (SM-26-006), closes July 16, 2026.
+- [Trauma-Informed Services in Schools](entities/programs/trauma-informed-services-in-schools.md) — SAMHSA grant (SM-26-006), closes July 16, 2026 (final day).
 - [Pediatric Mental Health Care Access Program (PMHCA)](entities/programs/pediatric-mental-health-care-access-program.md) — HRSA grant, closes July 10, 2026.
 - [Florida Mental Health Assistance Allocation](entities/programs/florida-mental-health-assistance-allocation.md) — state school-mental-health funding vehicle.
 
@@ -69,4 +73,5 @@ Grouped by type; each entity links to its page in `entities/`.
 
 Each week links to its file in `digests/`, newest first.
 
+- [2026-W29](digests/2026/2026-W29.md) — Jul 8 – Jul 15, 2026: 15 states sue ED over ~$1B school mental-health grant terminations; Anthropic launches Claude for Teachers as NYC pauses software purchases; SAMHSA NOFOs hit close dates.
 - [2026-W27](digests/2026/2026-W27.md) — Jun 24 – Jul 1, 2026: Maryland's $96M vs Maine's frozen federal funds; ETS acquires ACT; SAMHSA school-trauma grant open.
