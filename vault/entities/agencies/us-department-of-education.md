@@ -7,22 +7,47 @@ aliases: ["ED", "Ed Dept", "Department of Education"]
 layer: federal
 status: active
 first_seen: 2026-W27
-last_updated: 2026-W29
+last_updated: 2026-W30
 tags: [special-education, financing, school-based-mental-health]
 ---
 
 ## Current snapshot
 
-The department is now in open litigation over school mental-health money: 15 state attorneys
-general sued to block its termination of roughly $1B in school mental-health grants, with cutoffs
-effective July 2026 and states alleging the department is circumventing an existing court order
-protecting the funds. Its restructuring push continues on two tracks — former federal officials
-oppose the ED–HHS interagency agreement on special education (whose monitoring ED has reportedly
-scaled back), while ten congressional bills would codify the outsourcing of federal education
-programs into statute.
-*(as of 2026-W29)*
+The department is at a July decision point on the $1B school mental-health grants: despite the
+December 19, 2025 injunction, it is moving to "terminate" them under 2 C.F.R. § 200.340 (after
+courts blocked "discontinuation" under 34 C.F.R. § 75.253), with a hearing July 24, 2026 and
+terminations possible as early as July 31 per its own motion. The Washington-led 15-state suit
+and a protective Connecticut filing oppose it, and Judge Talwani separately rejected the "agency
+priorities" termination theory in a 21-AG case covering $5.4B in grants. The dismantling push
+continues in parallel: the ED–HHS agreement would move IDEA administration to HHS (one of 14
+agreements with six agencies), the proposed FY27 budget would cut OSERS staff from 163 to 31,
+86 House Democrats demanded reversal, and House Republicans advanced a 10-bill codification
+package.
+*(as of 2026-W30)*
 
 ## Timeline
+
+### 2026-W30 — ED moves to terminate the $1B school mental-health grants; hearing July 24
+*The 74 · July 17, 2026* · [link](https://www.the74million.org/article/connecticut-sues-again-over-withheld-school-mental-health-grants/)
+Despite the December 19, 2025 injunction, ED now cites 2 C.F.R. § 200.340 ("termination") instead
+of the blocked 34 C.F.R. § 75.253 ("discontinuation") pathway; a hearing is set for July 24, with
+terminations possible as early as July 31 per ED's own motion. Connecticut AG William Tong filed
+again "protectively," alongside the 15-state suit led by Washington
+(also: [Islands' Sounder, July 19](https://news.google.com/rss/articles/CBMi3gFBVV95cUxNUEIyTnhFY0dWa09DbVYteVZkajNTN1ZNUi1QbDJFVVdPelVHanQwTHJZTTNkYlhjbFNSQnplN1J1bDlKT3VKNldLZWdOTU1kNVh5SWg1dG5CZWNyRTBUQ0kxaC1qWWJEWC0zQTQtcVFqbGd6NmVDd2k1eEhUcDczZ2xYamNwRW1Ud2tyeUxST1dpenVoNW5pcU00V3lOR1YtS1VtaG9ubmJ4ZWtCUVE2N3JLOXFNOVFXVXoxcDBoNUR6RllMS2xteDBKX08wcENSam9mWVZ2YUdKMUZHZUE?oc=5)).
+
+### 2026-W30 — Judge rules grants can't be revoked over new "agency priorities"
+*K-12 Dive · July 20, 2026* · [link](https://www.k12dive.com/news/trump-officials-cant-revoke-grants-due-to-new-agency-goals-judge-rules/825719/)
+U.S. District Judge Indira Talwani, siding with 21 attorneys general and three governors holding
+$5.4B in existing grants, ruled the administration's reading of the OMB termination clause "is
+not clearly supported by the text" and "runs counter to the regulatory scheme." Future
+priority-shift terminations are blocked; past cuts are not undone.
+
+### 2026-W30 — Special educators oppose IDEA move to HHS; FY27 would cut OSERS staff 163 → 31
+*K-12 Dive · July 21, 2026* · [link](https://www.k12dive.com/news/special-educators-oppose-education-department-breakup-interagency-agreement-Health-Human-Services/825821/)
+Special-education professionals and former ED officials opposed the ED–HHS interagency agreement
+moving IDEA grants, compliance and monitoring, and state performance determinations to HHS; 86
+House Democrats asked Secretary McMahon to reverse it, while House Republicans advanced a 10-bill
+package to make transfers permanent. IDEA funds $15.5B in FY26 for roughly 8.2 million students.
 
 ### 2026-W29 — 15 states sue ED over termination of ~$1B in school mental-health grants
 *K-12 Dive · July 14, 2026* · [link](https://www.k12dive.com/news/mental-health-grant-cancellations-at-issue-in-new-lawsuit-from-15-states/825118/)

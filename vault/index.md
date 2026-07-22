@@ -1,6 +1,6 @@
 ---
 type: index
-last_updated: 2026-W29
+last_updated: 2026-W30
 ---
 
 # Thrive Center K12 Knowledge Vault
@@ -41,7 +41,7 @@ naming rules) is in [TAGS.md](TAGS.md).
 
 Each theme links to its page in `themes/`.
 
-- [School Mental Health Funding — State vs Federal Reliability](themes/school-mental-health-funding.md) — states stepping in as federal school-mental-health money wobbles; now in open litigation (15 states v. ED).
+- [School Mental Health Funding — State vs Federal Reliability](themes/school-mental-health-funding.md) — the $1B BSCA grants at a termination showdown: hearing July 24, terminations possible July 31.
 - [Federal Education Restructuring — ED Downsizing & Outsourcing](themes/federal-education-restructuring.md) — the dismantling/outsourcing of ED, contested and codified at once.
 - [Classroom AI — Policy, Procurement & the Vendor Race](themes/classroom-ai.md) — the AI land-grab meeting district procurement gates.
 - [Chronic Absenteeism & Re-engagement](themes/chronic-absenteeism.md) — attendance as the accountability frame for wellbeing investments.
@@ -62,16 +62,18 @@ Grouped by type; each entity links to its page in `entities/`.
 - [U.S. Department of Education](entities/agencies/us-department-of-education.md) — federal education funding, special education, school choice.
 - [SAMHSA](entities/agencies/samhsa.md) — federal behavioral/mental-health grant funder.
 - [HRSA](entities/agencies/hrsa.md) — federal pediatric health-access grant funder.
+- [CMS](entities/agencies/cms.md) — Medicare/Medicaid payment policy; the rails for school-adjacent behavioral-health billing.
 
 ### Programs
 
-- [Trauma-Informed Services in Schools](entities/programs/trauma-informed-services-in-schools.md) — SAMHSA grant (SM-26-006), closes July 16, 2026 (final day).
-- [Pediatric Mental Health Care Access Program (PMHCA)](entities/programs/pediatric-mental-health-care-access-program.md) — HRSA grant, closes July 10, 2026.
+- [Trauma-Informed Services in Schools](entities/programs/trauma-informed-services-in-schools.md) — SAMHSA grant (SM-26-006), closed July 16, 2026.
+- [Pediatric Mental Health Care Access Program (PMHCA)](entities/programs/pediatric-mental-health-care-access-program.md) — HRSA grant, closed July 10, 2026.
 - [Florida Mental Health Assistance Allocation](entities/programs/florida-mental-health-assistance-allocation.md) — state school-mental-health funding vehicle.
 
 ## Digests by week
 
 Each week links to its file in `digests/`, newest first.
 
+- [2026-W30](digests/2026/2026-W30.md) — Jul 15 – Jul 22, 2026: ED moves to terminate the $1B school mental-health grants (hearing July 24, terminations possible July 31); judge rejects "agency priorities" revocations; Texas's 86% federal dependence for school mental health; two SAMHSA NOFOs close July 27.
 - [2026-W29](digests/2026/2026-W29.md) — Jul 8 – Jul 15, 2026: 15 states sue ED over ~$1B school mental-health grant terminations; Anthropic launches Claude for Teachers as NYC pauses software purchases; SAMHSA NOFOs hit close dates.
 - [2026-W27](digests/2026/2026-W27.md) — Jun 24 – Jul 1, 2026: Maryland's $96M vs Maine's frozen federal funds; ETS acquires ACT; SAMHSA school-trauma grant open.
